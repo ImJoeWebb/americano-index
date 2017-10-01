@@ -2,9 +2,8 @@ defmodule Storage.AgentTest do
   use ExUnit.Case
   doctest Storage.Agent
 
-  setup do
-    test_id = :rand.normal |> to_string
-    storage_name = "storage_#{test_id}" |> String.to_atom
+  setup context do
+    storage_name = "storage_#{context.case}_#{context.test}" |> String.to_atom
     Storage.Agent.start_link(name: storage_name)
 
     %{storage_name: storage_name}
