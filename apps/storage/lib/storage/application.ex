@@ -9,7 +9,7 @@ defmodule Storage.Application do
     # List all child processes to be supervised
     children = [
       # Starts a worker by calling: Storage.Worker.start_link(arg)
-      # {Storage.Worker, arg},
+      {Storage.Agent, [name: Storage.Agent]},
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

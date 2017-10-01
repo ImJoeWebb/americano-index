@@ -3,16 +3,6 @@ defmodule Storage do
   Documentation for Storage.
   """
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Storage.hello
-      :world
-
-  """
-  def hello do
-    :world
-  end
+  defdelegate add_cafe(cafe_to_be_added), to: Storage.Agent
+  defdelegate add_cafe(cafe_to_be_added, storage_name), to: Storage.Agent
 end

@@ -8,11 +8,10 @@ defmodule Core do
 
   ## Examples
 
-      iex> Core.hello
-      :world
+      iex> Core.add_cafe(%{name: "Café Aroma", americano_price: 4_00})
+      :ok
 
   """
-  def hello do
-    :world
-  end
+
+  defdelegate add_cafe(cafe_to_be_added), to: Storage
 end
