@@ -4,7 +4,7 @@ defmodule Core do
   """
 
   @doc """
-  Hello world.
+  Add a cafe.
 
   ## Examples
 
