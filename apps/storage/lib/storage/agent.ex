@@ -21,4 +21,9 @@ defmodule Storage.Agent do
   def add_cafe(cafe_to_be_added, name \\ __MODULE__) do
     Agent.update(name, &Map.put(&1, :cafes, [cafe_to_be_added | &1.cafes]))
   end
+
+  @spec list_cafes :: list
+  def list_cafes(name \\ __MODULE__) do
+    Agent.get(name, fn state -> state.cafes end)
+  end
 end

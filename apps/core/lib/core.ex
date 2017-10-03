@@ -14,4 +14,15 @@ defmodule Core do
   """
 
   defdelegate add_cafe(cafe_to_be_added), to: Storage
+
+  @doc """
+  List cafes.
+
+  ## Examples
+
+      iex> Core.list_cafes
+      []
+  """
+
+  defdelegate list_cafes, to: Storage
 end

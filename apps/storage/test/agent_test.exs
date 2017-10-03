@@ -28,4 +28,14 @@ defmodule Storage.AgentTest do
     assert Storage.Agent.add_cafe(second_cafe_to_be_added, storage_name) == :ok
     assert :sys.get_state(storage_name) == %{cafes: [second_cafe_to_be_added, cafe_to_be_added]}
   end
+
+  test "list_cafes", %{storage_name: storage_name} do
+    assert Storage.Agent.list_cafes(storage_name) == []
+
+    :sys.replace_state(storage_name, fn(_state)->
+      %{cafes: [%{name: "Café Commissary", americano_price: 3_00}]}
+    end)
+
+    assert Storage.Agent.list_cafes(storage_name) == [%{name: "Café Commissary", americano_price: 3_00}]
+  end
 end

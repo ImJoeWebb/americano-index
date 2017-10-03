@@ -5,4 +5,5 @@ defmodule Storage do
 
   defdelegate add_cafe(cafe_to_be_added), to: Storage.Agent
   defdelegate add_cafe(cafe_to_be_added, storage_name), to: Storage.Agent
+  defdelegate list_cafes, to: Storage.Agent
 end
