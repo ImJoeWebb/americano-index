@@ -41,6 +41,7 @@ defmodule Api.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:core, in_umbrella: true},
+      {:ecto, "~> 2.2.6"}
     ]
   end
 end
