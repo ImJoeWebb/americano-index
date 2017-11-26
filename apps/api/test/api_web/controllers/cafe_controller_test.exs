@@ -34,32 +34,58 @@ defmodule ApiWeb.CafeControllerTest do
       # empty object
       params = %{}
       conn = post conn, cafe_path(conn, :create, params)
-      assert json_response(conn, 422) == %{"errors" => %{"americano_price" => ["can't be blank"], "name" => ["can't be blank"]}}
+      assert json_response(conn, 422) == %{
+        "errors" => %{
+          "americano_price" => ["can't be blank"],
+          "name" => ["can't be blank"]
+        }
+      }
 
       # all params nil
       params = %{name: nil, americano_price: nil}
       conn = post conn, cafe_path(conn, :create, params)
-      assert json_response(conn, 422) == %{"errors" => %{"americano_price" => ["can't be blank"], "name" => ["can't be blank"]}}
+      assert json_response(conn, 422) == %{
+        "errors" => %{
+          "americano_price" => ["can't be blank"],
+          "name" => ["can't be blank"]
+        }
+      }
 
       # nil name
       params = %{name: nil, americano_price: 350}
       conn = post conn, cafe_path(conn, :create, params)
-      assert json_response(conn, 422) == %{"errors" => %{"name" => ["can't be blank"]}}
+      assert json_response(conn, 422) == %{
+        "errors" => %{
+          "name" => ["can't be blank"]
+        }
+      }
 
       # nil americano price
       params = %{name: "Andante", americano_price: nil}
       conn = post conn, cafe_path(conn, :create, params)
-      assert json_response(conn, 422) == %{"errors" => %{"americano_price" => ["can't be blank"]}}
+      assert json_response(conn, 422) == %{
+        "errors" => %{
+          "americano_price" => ["can't be blank"]
+        }
+      }
 
       # wrong type americano price
       params = %{name: "Andante", americano_price: "Andante"}
       conn = post conn, cafe_path(conn, :create, params)
-      assert json_response(conn, 422) == %{"errors" => %{"americano_price" => ["is invalid"]}}
+      assert json_response(conn, 422) == %{
+        "errors" => %{
+          "americano_price" => ["is invalid"]
+        }
+      }
 
       # wrong type name
       params = %{name: ["Andante"], americano_price: 400}
       conn = post conn, cafe_path(conn, :create, params)
-      assert json_response(conn, 422) == %{"errors" => %{"name" => ["is invalid"]}}
+      assert json_response(conn, 422) == %{
+        "errors" => %{
+          "name" => ["is invalid"]
+        }
+      }
     end
   end
 end
