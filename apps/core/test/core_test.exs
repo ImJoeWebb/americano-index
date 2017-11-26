@@ -1,5 +1,5 @@
 defmodule CoreTest do
-  use ExUnit.Case
+  use Storage.CleanCase
   doctest Core
 
   test "add_cafe" do

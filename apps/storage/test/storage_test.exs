@@ -1,4 +1,4 @@
 defmodule StorageTest do
-  use ExUnit.Case
+  use Storage.CleanCase
   doctest Storage
 end

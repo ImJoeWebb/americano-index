@@ -17,13 +17,26 @@ defmodule Storage.Agent do
     }
   end
 
-  @spec add_cafe(map, atom) :: :ok
-  def add_cafe(cafe_to_be_added, name \\ __MODULE__) do
-    Agent.update(name, &Map.put(&1, :cafes, [cafe_to_be_added | &1.cafes]))
+  @spec add_cafe(map) :: :ok
+  def add_cafe(cafe_to_be_added) do
+    Agent.update(name(), &Map.put(&1, :cafes, [cafe_to_be_added | &1.cafes]))
   end
 
   @spec list_cafes :: list
-  def list_cafes(name \\ __MODULE__) do
-    Agent.get(name, fn state -> state.cafes end)
+  def list_cafes do
+    Agent.get(name(), fn state -> state.cafes end)
+  end
+
+  @storage_name_type Application.get_env(:storage, :storage_name_type)
+  defp name do
+    case @storage_name_type do
+      :fixed    -> __MODULE__
+      :registry -> get_name_in_registry()
+    end
+  end
+
+  defp get_name_in_registry do
+    [{_pid, name}] = Registry.lookup(:storage_names, self())
+    name
   end
 end
