@@ -14,10 +14,12 @@ defmodule ApiWeb.CafeControllerTest do
 
     test "lists all cafes", %{conn: conn} do
       conn = get conn, cafe_path(conn, :index)
-      assert json_response(conn, 200)["data"] == [
-        %{"americano_price" => 350, "name" => "Andante"},
-        %{"americano_price" => 400, "name" => "Café Aroma"}
-      ]
+      assert json_response(conn, 200) == %{
+        "data" => [
+          %{"americano_price" => 350, "name" => "Andante"},
+          %{"americano_price" => 400, "name" => "Café Aroma"}
+        ]
+      }
     end
   end
 
@@ -25,7 +27,7 @@ defmodule ApiWeb.CafeControllerTest do
     test "adds a cafe with valid params", %{conn: conn} do
       params = %{name: "Andante", americano_price: 350}
       conn = post conn, cafe_path(conn, :create, params)
-      assert json_response(conn, 201)
+      assert json_response(conn, 201) == %{"americano_price" => 350, "name" => "Andante"}
     end
 
     test "adds a cafe with invalid params", %{conn: conn} do
